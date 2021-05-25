@@ -1,63 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>kang yi ping</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <style>
-        body{
-            margin: 0;
-        }
-        .container{
-            display: flex;
-        }
-        .notebook,.input,.markdown{
-            /*border: 2px solid tomato;*/
-            height: 1000px;
-        }
-        .notebook{
-            width: 20%;
-            /*position: absolute;
-            left: 0;
-            top: 0;
-            float: left;*/
-            background-color: thistle;
-        }
-        .input{
-            /*width: 40%;
-            position: absolute;
-            left: 20%;
-            top: 0;*/
-            flex: 1;
-            background-color: wheat;
-        }
-        .markdown{
-            width: 40%;
-            /*position: absolute;
-            left: 60%;
-            top: 0;
-            float: right;*/
-            background-color: pink;
-        }
-    </style>
-
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div id="book">
-        <div class="container">
-            <div class="notebook">notebook</div>
-            <div class="input">input</div>
-            <div class="markdown">markdown</div>
+        <div class="notebook">notebook</div>
+        <div class="input">
+            <textarea class="inputtext"></textarea>
         </div>
+        <div class="markdown">markdown</div>
+
     </div>
 
     <script>
-        var vm=new Vue({
-            el:'#book',
+        var vm = new Vue({
+            el: '#book',
         })
     </script>
 
 </body>
+
 </html>
