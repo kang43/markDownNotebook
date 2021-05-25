@@ -10,6 +10,9 @@
         body{
             margin: 0;
         }
+        .container{
+            display: flex;
+        }
         .notebook,.input,.markdown{
             /*border: 2px solid tomato;*/
             height: 1000px;
@@ -18,24 +21,24 @@
             width: 20%;
             /*position: absolute;
             left: 0;
-            top: 0;*/
-            float: left;
+            top: 0;
+            float: left;*/
             background-color: thistle;
         }
         .input{
-            width: 40%;
-            /*position: absolute;
+            /*width: 40%;
+            position: absolute;
             left: 20%;
             top: 0;*/
-            float: left;
+            flex: 1;
             background-color: wheat;
         }
         .markdown{
             width: 40%;
             /*position: absolute;
             left: 60%;
-            top: 0;*/
-            float: right;
+            top: 0;
+            float: right;*/
             background-color: pink;
         }
     </style>
@@ -43,9 +46,11 @@
 </head>
 <body>
     <div id="book">
-        <div class="notebook">notebook</div>
-        <div class="input">input</div>
-        <div class="markdown">markdown</div>
+        <div class="container">
+            <div class="notebook">notebook</div>
+            <div class="input">input</div>
+            <div class="markdown">markdown</div>
+        </div>
     </div>
 
     <script>
