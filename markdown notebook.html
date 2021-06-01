@@ -36,6 +36,15 @@
                 previewMarked(){
                     return marked(this.content)
                 }
+            },
+            watch:{
+                content(){
+                    //console.log("new:",val,"old:",oldval)
+                    localStorage.setItem('content',this.content)
+                }
+            },
+            created(){
+                this.content=localStorage.getItem('content')
             }
 
         })
