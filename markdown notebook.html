@@ -13,11 +13,18 @@
 
 <body>
     <div id="book">
-        <div class="notebook">notebook</div>
-        <div class="input">
-            <textarea class="inputtext" v-model="content"></textarea>
+        <div class="notebook">
+            <div>
+                <button v-bind:title="addButtonTitle" v-on:click="addNote">Add Note</button>
+                <div @click="selectNote(note)" class="note"
+                 :class="{selected:note===selectedNote}"
+                 v-for="note of notes">{{note.title}}</div>
+            </div>
         </div>
-        <div class="markdown" v-html="previewMarked">
+        <div class="input">
+            <textarea class="inputtext" v-model="selectedNote.content" v-if="selectedNote"></textarea>
+        </div>
+        <div class="markdown" v-html="previewMarked" v-if="selectedNote">
             
         </div>
 
@@ -30,24 +37,70 @@
         var vm = new Vue({
             el: '#book',
             data:{
-                content:""
+                content:"",
+                notes: JSON.parse(localStorage.getItem("notes")) || [],
+                selectedId:localStorage.getItem('selected-id') || null,
             },
             computed:{
                 previewMarked(){
-                    return marked(this.content)
+                    return this.selectedNote ? marked(this.selectedNote.content) :''
+                },
+
+                addButtonTitle(){
+                    return this.notes.length +'  notebook' 
+                },
+
+                selectedNote(){
+                    return this.notes.find(note=>note.id===this.selectedId)
                 }
             },
             watch:{
-                content(){
+                //content(){
                     //console.log("new:",val,"old:",oldval)
-                    localStorage.setItem('content',this.content)
+                    //localStorage.setItem('content',this.content)
+                //}
+                //content:{
+                   // handler:"saveNote"
+               // },
+                notes:{
+                    handler:'saveNotes',
+                    deep:true
+                },
+                selectedId(val){
+                    localStorage.setItem('selected-id',val)
                 }
             },
-            created(){
-                this.content=localStorage.getItem('content')
+            //created(){
+                //this.content=localStorage.getItem('content')
+            //},
+            methods: {
+                addNote() {
+                    const time = Date.now()
+                    const note = {
+                        id: String(time),
+                        title: 'New note' + (this.notes.length + 1),
+                        content: '**Hi!**',
+                        created: time,
+                        favorite: false,
+                    }
+                    this.notes.push(note)
+                },
+                saveNote() {
+                    console.log('saving notes:', this.notes)
+                    localStorage.setItem('notes',JSON.stringify(this.notes))
+                },
+                selectNote(note){
+                    this.selectedId=note.id,
+                    console.log(this.selectedId)
+                },
+                saveNotes(){
+                    localStorage.setItem('notes',JSON.stringify(this.notes))
+                    console.log('note saved:',new Date())
+                }
             }
-
         })
+
+        //console.log('restored noted:', localStorage.getItem('content'))
     </script>
 
 </body>

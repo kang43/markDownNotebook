@@ -35,3 +35,17 @@ body {
     height: 100%;
     background-color: bisque;
 }
+
+button{
+    height: 30px;
+}
+
+.note{
+    height: 30px;
+    margin-bottom: 1px;
+    background: palegreen;
+}
+
+.note.selected{
+    background: yellow;
+}
